@@ -1,5 +1,5 @@
 # Facebook AccountKit using PHP
-This is a basic web project based in __PHP__ that help you to understand how __"Facebook AccountKit"__ works, you can use this project as a basic for a new project or you can take part of the code to facilitate the integration into an existing project.
+This is a basic web project based in __PHP__ that help you to understand how __"Facebook AccountKit"__ works, you can use this project as a basic for a new project or you can take part of the code to facilitate the integration into an existing project. You can test this demo in the next link: http://bit.ly/23IN8le
 
 ![alt tag](https://elaniin.com/github/webAK1.png) ![alt tag](https://elaniin.com/github/webAK2.png) ![alt tag](https://elaniin.com/github/webAK3.png)
 
