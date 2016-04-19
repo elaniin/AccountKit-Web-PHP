@@ -1,0 +1,18 @@
+body{
+  font-family: helvetica;
+}
+.ac{
+  text-align: center;
+}
+.buttons{
+  max-width: 300px;
+  margin: auto;
+}
+.buttons button{
+  width: 100%;
+  border-style: none;
+  background-color: #4E86FF;
+  color: #FFF;
+  padding: 10px;
+  margin: 5px 0;
+}
