@@ -49,7 +49,7 @@ if(isset($_POST["code"])){
 ?>
 <html>
 <head>
-	<title>Login with AccountKit</title>
+	<title>Login with Account Kit</title>
   <link rel="shortcut icon" href="ak-icon.png">
   <link rel="stylesheet" href="css.css">
   <!--Hotlinked Account Kit SDK-->
@@ -60,8 +60,8 @@ if(isset($_POST["code"])){
 // verifying if the session exists
 if(is_session_started() === FALSE && !isset($_SESSION)){
 ?>
-<h1 class="ac">Login with AccountKit</h1>
-<p class="ac">This example shows you how to implement<br>Facebook AccountKit for web using PHP.</p>
+<h1 class="ac">Login with Account Kit</h1>
+<p class="ac">This example shows you how to implement<br>Facebook Account Kit for web using PHP.</p>
 <div class="buttons">
   <button onclick="phone_btn_onclick();">Login with SMS</button>
   <button onclick="email_btn_onclick();">Login with Email</button>
@@ -73,8 +73,8 @@ if(is_session_started() === FALSE && !isset($_SESSION)){
 <?php
 }else{
 ?>
-<h1 class="ac">Login with AccountKit</h1>
-<p class="ac">The session with Facebook AccountKit is already started.</p>
+<h1 class="ac">Login with Account Kit</h1>
+<p class="ac">The session with Facebook Account Kit is already started.</p>
 <h3 class="ac">Your Information</h3>
 <p class="ac">
   <!-- show account information -->
