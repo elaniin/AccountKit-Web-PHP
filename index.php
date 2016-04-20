@@ -75,7 +75,7 @@ if(is_session_started() === FALSE && !isset($_SESSION)){
 ?>
 <h1 class="ac">Login with AccountKit</h1>
 <p class="ac">The session with Facebook AccountKit is already started.</p>
-<h3 class="ac">Tu Información</h3>
+<h3 class="ac">Your Information</h3>
 <p class="ac">
   <!-- show account information -->
   <strong>ID:</strong> <?=$final->id?> <br>
@@ -112,11 +112,11 @@ if(is_session_started() === FALSE && !isset($_SESSION)){
     }
     else if (response.status === "NOT_AUTHENTICATED") {
       // handle authentication failure
-      console.log("Sin Autenticar");
+      console.log("Authentication failure");
     }
     else if (response.status === "BAD_PARAMS") {
       // handle bad parameters
-      console.log("Parámetros Erroneos");
+      console.log("Bad parameters");
     }
   }
 
