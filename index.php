@@ -123,14 +123,14 @@ if(is_session_started() === FALSE && !isset($_SESSION)){
   // phone form submission handler
   function phone_btn_onclick() {
     // you can add countryCode and phoneNumber to set values
-    AccountKit.login('PHONE', // will use default values if this is not specified
+    AccountKit.login('PHONE', {}, // will use default values if this is not specified
       loginCallback);
   }
 
   // email form submission handler
   function email_btn_onclick() {  
     // you can add emailAddress to set value
-    AccountKit.login('EMAIL', loginCallback);
+    AccountKit.login('EMAIL', {}, loginCallback);
   }
 
   // destroying session
