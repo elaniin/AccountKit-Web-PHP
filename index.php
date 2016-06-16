@@ -16,7 +16,6 @@ if(isset($_POST["code"])){
   session_start();
   $_SESSION["code"] = $_POST["code"];
   $_SESSION["csrf_nonce"] = $_POST["csrf_nonce"];
-
   $ch = curl_init();
   // Set url elements
   $fb_app_id = '465871913602533';
@@ -24,32 +23,27 @@ if(isset($_POST["code"])){
   $token = 'AA|'.$fb_app_id.'|'.$ak_secret;
   // Get access token
   $url = 'https://graph.accountkit.com/v1.0/access_token?grant_type=authorization_code&code='.$_POST["code"].'&access_token='.$token;
-
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($ch, CURLOPT_URL,$url);
   $result=curl_exec($ch);
   curl_close($ch);
-
   $info = json_decode($result);
-
   // Get account information
   $url = 'https://graph.accountkit.com/v1.0/me/?access_token='.$info->access_token;
-
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($ch, CURLOPT_URL,$url);
   $result=curl_exec($ch);
   curl_close($ch);
-
-  $final = json_decode($result);
+  $final = json_decode($result);  
 }
 ?>
 <html>
 <head>
-	<title>Login with Account Kit</title>
+  <title>Login with Account Kit</title>
   <link rel="shortcut icon" href="ak-icon.png">
   <link rel="stylesheet" href="css.css">
   <!--Hotlinked Account Kit SDK-->
@@ -79,8 +73,18 @@ if(is_session_started() === FALSE && !isset($_SESSION)){
 <p class="ac">
   <!-- show account information -->
   <strong>ID:</strong> <?=$final->id?> <br>
+  <?php
+  if(isset($final->email)){
+  ?>
+  <strong>Email:</strong> <?=$final->email->address?>
+  <?php
+  }else{
+  ?>
   <strong>Country Code:</strong> +<?=$final->phone->country_prefix?> <br>
   <strong>Phone Number:</strong> <?=$final->phone->national_number?> 
+  <?php
+  }
+  ?>  
 </p>
 <div class="buttons">
   <button onclick="logout();">Logout</button>
@@ -101,7 +105,6 @@ if(is_session_started() === FALSE && !isset($_SESSION)){
       //If your Account Kit configuration requires app_secret, you have to include ir above
     );
   };
-
   // login callback
   function loginCallback(response) {
     console.log(response);
@@ -119,24 +122,20 @@ if(is_session_started() === FALSE && !isset($_SESSION)){
       console.log("Bad parameters");
     }
   }
-
   // phone form submission handler
   function phone_btn_onclick() {
     // you can add countryCode and phoneNumber to set values
     AccountKit.login('PHONE', {}, // will use default values if this is not specified
       loginCallback);
   }
-
   // email form submission handler
   function email_btn_onclick() {  
     // you can add emailAddress to set value
     AccountKit.login('EMAIL', {}, loginCallback);
   }
-
   // destroying session
   function logout() {
         document.location = 'logout.php';
   }
-
 </script>
 </html>
