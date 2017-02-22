@@ -23,16 +23,13 @@ if(isset($_POST["code"])){
   $token = 'AA|'.$fb_app_id.'|'.$ak_secret;
   // Get access token
   $url = 'https://graph.accountkit.com/v1.0/access_token?grant_type=authorization_code&code='.$_POST["code"].'&access_token='.$token;
-  $ch = curl_init();
   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($ch, CURLOPT_URL,$url);
   $result=curl_exec($ch);
-  curl_close($ch);
   $info = json_decode($result);
   // Get account information
   $url = 'https://graph.accountkit.com/v1.0/me/?access_token='.$info->access_token;
-  $ch = curl_init();
   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($ch, CURLOPT_URL,$url);
