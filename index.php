@@ -41,6 +41,8 @@ if(isset($_POST["code"])){
 <html>
 <head>
   <title>Login with Account Kit</title>
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="ak-icon.png">
   <link rel="stylesheet" href="css.css">
   <!--Hotlinked Account Kit SDK-->
