@@ -1,19 +1,8 @@
 <?php
-// function to verify session status
-function is_session_started()
-{
-    if ( php_sapi_name() !== 'cli' ) {
-        if ( version_compare(phpversion(), '5.4.0', '>=') ) {
-            return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
-        } else {
-            return session_id() === '' ? FALSE : TRUE;
-        }
-    }
-    return FALSE;
-}
+session_start();
+
 // verifying POST data and adding the values to session variables
 if(isset($_POST["code"])){
-  session_start();
   $_SESSION["code"] = $_POST["code"];
   $_SESSION["csrf_nonce"] = $_POST["csrf_nonce"];
   $ch = curl_init();
@@ -35,8 +24,21 @@ if(isset($_POST["code"])){
   curl_setopt($ch, CURLOPT_URL,$url);
   $result=curl_exec($ch);
   curl_close($ch);
-  $final = json_decode($result);  
+  $final = json_decode($result);
+
+  $_SESSION['id'] = $final->id;
+
+  if(isset($final->email))
+  {
+    $_SESSION['email'] = $final->email->address;
+  }
+  else
+  {
+    $_SESSION['country_code'] = $final->phone->country_prefix;
+    $_SESSION['phone'] = $final->phone->national_number;
+  }
 }
+
 ?>
 <html>
 <head>
@@ -51,7 +53,7 @@ if(isset($_POST["code"])){
 <body>
 <?php
 // verifying if the session exists
-if(is_session_started() === FALSE && !isset($_SESSION)){
+if(empty($_SESSION)){
 ?>
 <h1 class="ac">Login with Account Kit</h1>
 <p class="ac">This example shows you how to implement<br>Facebook Account Kit for web using PHP.</p>
@@ -71,16 +73,16 @@ if(is_session_started() === FALSE && !isset($_SESSION)){
 <h3 class="ac">Your Information</h3>
 <p class="ac">
   <!-- show account information -->
-  <strong>ID:</strong> <?=$final->id?> <br>
+  <strong>ID:</strong> <?=$_SESSION['id']?> <br>
   <?php
-  if(isset($final->email)){
-  ?>
-  <strong>Email:</strong> <?=$final->email->address?>
+  if(isset($_SESSION['email'])){
+  ?>  
+  <strong>Email:</strong> <?=$_SESSION['email']?>
   <?php
   }else{
   ?>
-  <strong>Country Code:</strong> +<?=$final->phone->country_prefix?> <br>
-  <strong>Phone Number:</strong> <?=$final->phone->national_number?> 
+  <strong>Country Code:</strong> +<?=$_SESSION['country_code']?> <br>
+  <strong>Phone Number:</strong> <?=$_SESSION['phone']?> 
   <?php
   }
   ?>  
